@@ -2,7 +2,6 @@ export default {
   title: 'Home',
   name: 'home',
   type: 'document',
-  __experimental_actions: ['update', 'create', 'delete', 'publish'],
   fields: [
     {
       title: 'Title',
@@ -11,9 +10,33 @@ export default {
       validation: Rule => Rule.required()
     },
     {
-      title: 'Image',
+      title: 'Background Image',
       name: 'image',
+      description: 'The large image that appears in the background',
       type: 'defaultImage',
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'Intro Text',
+      name: 'introText',
+      type: 'text',
+      rows: 3,
+      description: 'The introduction text that appears on the poster',
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'Poster Video Reel',
+      name: 'posterVideoReel',
+      description: 'The .mp4 file for the poster video',
+      type: 'file',
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'Footer Text',
+      name: 'footerText',
+      type: 'text',
+      rows: 3,
+      description: 'The ending text that appears below the footer logo',
       validation: Rule => Rule.required()
     },
     {
@@ -21,15 +44,5 @@ export default {
       name: 'seo',
       type: 'seo'
     }
-  ],
-  preview: {
-    select: {
-      title: 'title'
-    },
-    prepare ({ title }) {
-      return {
-        title
-      }
-    }
-  }
+  ]
 }

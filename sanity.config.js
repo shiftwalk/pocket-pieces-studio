@@ -10,7 +10,7 @@ import { customTheme } from './utils/theme'
 
 
 export default defineConfig({
-  title: "Pocket",
+  title: "Pocket Pieces",
   projectId: "u1c1jefd",
   dataset: "production",
   theme: customTheme,
@@ -50,9 +50,9 @@ export default defineConfig({
   document: {
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return prev.filter((templateItem) => templateItem.templateId != 'settings')
+        return []
       }
-      return prev
+      return null
     },
     actions: (prev, { schemaType }) => {
       if (schemaType === 'settings') {
