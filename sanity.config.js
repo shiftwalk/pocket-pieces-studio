@@ -7,6 +7,10 @@ import { Logo } from './plugins/logo/Logo'
 import { media, mediaAssetSource } from 'sanity-plugin-media'
 import { vercelDeployTool } from 'sanity-plugin-vercel-deploy'
 import { customTheme } from './utils/theme'
+import { defaultDocumentNode } from './utils/defaultDocumentNode'
+
+const singletonActions = new Set(["publish", "discardChanges", "restore"])
+const singletonTypes = new Set(["home", "about", "credits", "info", "contact", "privacy"])
 
 
 export default defineConfig({
@@ -16,6 +20,7 @@ export default defineConfig({
   theme: customTheme,
   plugins: [
     deskTool({
+      defaultDocumentNode,
       structure: deskStructure
     }),
     visionTool(),
@@ -41,6 +46,8 @@ export default defineConfig({
   },
   schema: {
     types: schemas,
+    templates: (templates) =>
+      templates.filter(({ schemaType }) => !singletonTypes.has(schemaType)),
   },
   studio: {
     components: {
@@ -48,17 +55,32 @@ export default defineConfig({
     }
   },
   document: {
+    productionUrl: async (prev, context) => {
+      const { dataset, document} = context
+
+      if (document._type === 'home') {
+        const params = new URLSearchParams()
+        params.set('preview', 'true')
+        params.set('slug', '/')
+
+        return `http://localhost:3000/${params}`
+      } else {
+        const params = new URLSearchParams()
+        params.set('preview', 'true')
+        params.set('slug', document._type)
+
+        return `http://localhost:3000/${params}`
+      }
+    },
     newDocumentOptions: (prev, { creationContext }) => {
       if (creationContext.type === 'global') {
-        return []
-      }
-      return null
-    },
-    actions: (prev, { schemaType }) => {
-      if (schemaType === 'settings') {
-        return prev.filter(({ action }) => !['unpublish', 'delete','duplicate'].includes(action))
+        return prev.filter((templateItem) => templateItem.templateId != 'settings')
       }
       return prev
     },
+    actions: (input, context) =>
+      singletonTypes.has(context.schemaType)
+        ? input.filter(({ action }) => action && singletonActions.has(action))
+        : input,
   },
 });

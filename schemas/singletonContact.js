@@ -1,4 +1,4 @@
-import { FiMail } from "react-icons/fi"
+import { FiMail, FiStar } from "react-icons/fi"
 
 export default {
   title: 'Contact',
@@ -77,7 +77,7 @@ export default {
           title: 'Social',
           name: 'socialItem',
           type: 'object',
-          icon: FiMail,
+          icon: FiStar,
           fields: [
             {
               title: 'Title',

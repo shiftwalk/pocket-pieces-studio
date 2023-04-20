@@ -1,7 +1,7 @@
 // All Slugs go here...
 const globalSlugs = {
-  home: '/',
-  work: '/work',
+  home: '/home',
+  about: '/about',
   // etc: '/etc'
 }
 
@@ -9,7 +9,7 @@ const secret = process.env.SANITY_STUDIO_SANITY_PREVIEW_SECRET
 export const getGlobalSlug = (slug) => globalSlugs[slug]
 
 // Change remote url...
-const remoteURL = 'https://your-live-site.com'
+const remoteURL = 'https://pocket-pieces.vercel.app'
 const localURL = 'http://localhost:3000'
 export const previewURL = window.location.hostname === 'localhost' ? localURL : remoteURL
 
