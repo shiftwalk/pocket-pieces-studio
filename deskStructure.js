@@ -21,7 +21,7 @@ export default (S) =>
         .child(S.document().schemaType('about').documentId('singleton-about')).icon(FiSmile),
       S.divider(),
       S.listItem()
-        .title('Credits')
+        .title('Hiring')
         .child(S.document().schemaType('credits').documentId('singleton-credits')).icon(FiFilm),
       S.divider(),
       S.listItem()
@@ -29,7 +29,7 @@ export default (S) =>
         .child(S.documentTypeList('archives').title('Archives')).icon(FiCamera),
       S.divider(),
       S.listItem()
-        .title('Info')
+        .title('FAQs')
         .child(S.document().schemaType('info').documentId('singleton-info')).icon(FiInfo),
       S.divider(),
       S.listItem()
