@@ -25,6 +25,23 @@ export default {
       validation: Rule => Rule.required()
     },
     {
+      title: 'Poster Reel Images',
+      name: 'posterReelImages',
+      description: 'The images that tick along in the reel',
+      type: 'array',
+      options: {
+        layout: 'grid',
+      },
+      of: [
+        {
+          title: 'Image',
+          name: 'reelImage',
+          type: 'defaultImage',
+        },
+      ],
+      validation: Rule => Rule.required().min(3).max(20)
+    },
+    {
       title: 'Poster Video Reel',
       name: 'posterVideoReel',
       description: 'The .mp4 file for the poster video',

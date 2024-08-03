@@ -5,7 +5,8 @@ import {
   FiFileText,
   FiMail,
   FiFilm,
-  FiCamera
+  FiCamera,
+  FiGlobe
 } from 'react-icons/fi'
 
 export default (S) => 
@@ -38,6 +39,11 @@ export default (S) =>
       S.divider(),
       S.listItem()
         .title('Privacy')
-        .child(S.document().schemaType('privacy').documentId('singleton-privacy')).icon(FiFileText)
+        .child(S.document().schemaType('privacy').documentId('singleton-privacy')).icon(FiFileText),
+      S.divider(),
+      S.listItem()
+        .title('Globals')
+        .child(S.document().schemaType('globals').documentId('singleton-globals')).icon(FiGlobe)
+      
     ]
 )

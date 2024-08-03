@@ -9,6 +9,7 @@ import archives from './archives'
 
 import seo from './common/seo'
 import defaultImage from './common/defaultImage'
+import singletonGlobals from './singletonGlobals'
 
 export default [
   archives,
@@ -18,6 +19,7 @@ export default [
   singletonInfo,
   singletonPrivacy,
   singletonContact,
+  singletonGlobals,
   defaultImage,
   seo
 ]

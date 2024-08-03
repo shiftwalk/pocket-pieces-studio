@@ -1,4 +1,4 @@
-import { FiCamera } from 'react-icons/fi'
+import { FiCamera, FiMinusCircle } from 'react-icons/fi'
 
 export default {
   title: 'Credits',
@@ -78,10 +78,69 @@ export default {
     //   validation: Rule => Rule.required()
     // },
     {
+      title: 'Hero Images',
+      name: 'heroImages',
+      description: 'The 3 images that appear in the hero',
+      type: 'array',
+      options: {
+        layout: 'grid',
+      },
+      of: [
+        {
+          title: 'Image',
+          name: 'reelImage',
+          type: 'defaultImage',
+        },
+      ],
+      validation: Rule => Rule.required().min(3).max(3)
+    },
+    {
       title: 'Content Heading Text',
       name: 'contentHeadingText',
       type: 'text',
       rows: 3,
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'How Hiring Works',
+      name: 'questions',
+      type: 'array',
+      of: [
+        {
+          title: 'Question',
+          name: 'question',
+          type: 'object',
+          icon: FiMinusCircle,
+          fields: [
+            {
+              title: 'Question',
+              name: 'question',
+              type: 'string',
+              description: 'The heading for this question, eg: "How much does delivery cost?"',
+            },
+            {
+              title: 'Answer',
+              name: 'answer',
+              type: 'array', 
+              of: [{type: 'block'}],
+              validation: Rule => Rule.required()
+            },
+          ],
+          preview: {
+            select: {
+              question: 'question',
+              answer: 'answer'
+            },
+            prepare(selection) {
+              const {question, answer} = selection
+              return {
+                title: question,
+                subtitle: answer[0].children[0].text
+              }
+            }
+          }
+        },
+      ],
       validation: Rule => Rule.required()
     },
     // {
