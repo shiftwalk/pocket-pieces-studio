@@ -102,6 +102,73 @@ export default {
       validation: Rule => Rule.required()
     },
     {
+      title: 'Collabs Heading Text',
+      name: 'collabsHeadingText',
+      type: 'text',
+      rows: 3,
+      description: 'The heading text that appears under (About P.P)',
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'Collabs Polaroids',
+      name: 'polaroids',
+      type: 'array',
+      of: [
+        {
+          title: 'Polaroid',
+          name: 'polaroid',
+          type: 'object',
+          icon: FiCamera,
+          fields: [
+            {
+              title: 'Text',
+              name: 'text',
+              type: 'string',
+              description: 'The optional text heading for the polaroid',
+            },
+            {
+              title: 'Images',
+              name: 'images',
+              description: 'The images for this polaroid, if 2 are added the 2nd image will rotate in on hover',
+              type: 'array',
+              options: {
+                layout: 'grid',
+              },
+              of: [
+                {
+                  title: 'Image',
+                  name: 'polaroidImage',
+                  type: 'defaultImage',
+                },
+              ],
+              validation: Rule => Rule.required().max(2)
+            },
+          ],
+          preview: {
+            select: {
+              text: 'text',
+              images: 'images'
+            },
+            prepare(selection) {
+              const {text, images} = selection
+              return {
+                title: text,
+                media: images[0]
+              }
+            }
+          }
+        },
+      ],
+      validation: Rule => Rule.required()
+    },
+    {
+      title: 'Collabs Text',
+      name: 'collabsText',
+      type: 'array', 
+      of: [{type: 'block'}],
+      validation: Rule => Rule.required()
+    },
+    {
       title: 'How Hiring Works',
       name: 'questions',
       type: 'array',
